@@ -3,32 +3,34 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('blogs', function (Blueprint $table) {
+        Schema::create('features', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->unsignedBigInteger('community_id');
             $table->foreign('community_id')->references('id')->on('communities')->onDelete('cascade');
-            $table->string('title');
-            $table->string('author_name');
-            $table->text('content');
-            $table->string('slug');
-            $table->string('thumbnail');
+            $table->boolean('enabled')->default(false);
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('blogs');
+        Schema::dropIfExists('features');
     }
 };

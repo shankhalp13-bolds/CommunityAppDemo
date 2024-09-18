@@ -3,6 +3,7 @@
 use App\Http\Controllers\CashfreePaymentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\CheckFeature;
 use App\Models\Blog;
 use App\Models\Event;
 use App\Models\ExecutiveMember;
@@ -10,6 +11,11 @@ use App\Models\Gompa;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Laravel\Pennant\Feature;
+use Illuminate\Support\Facades\DB;
+
+// use Laravel\Pennant\Facades\Pennant;
+
 
 // Route::get('/', function () {
 //     return Inertia::render('Welcome', [
@@ -25,13 +31,12 @@ Route::get('/', [HomeController::class, 'showLayoutWithGallery'])->name('home');
 Route::get('/about-stba', function () {
     return Inertia::render('STBA/AboutUS');
 });
-Route::get('/events', function () {
+route::get('/events', function () {
     $event = Event::orderBy('created_at', 'desc')->get();
-
     return Inertia::render('STBA/Events', [
         "event" => $event
     ]);
-});
+})->middleware('checkFeatures:events');
 
 Route::get('/executive-members', function () {
     $executiveMember = ExecutiveMember::orderBy('created_at', 'desc')->with('executive_member_designation')->get();

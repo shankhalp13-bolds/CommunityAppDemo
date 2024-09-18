@@ -2,7 +2,7 @@ import { Link } from '@inertiajs/react';
 import React, { useState } from 'react'
 import { GiHamburgerMenu } from "react-icons/gi";
 
-const Navbar = () => {
+const Navbar = ({ isEventsEnabled }) => {
     const [menuOpen, setMenuOpen] = useState(false);
 
     // Mock data: replace this with actual user state
@@ -93,11 +93,13 @@ const Navbar = () => {
                                     About
                                 </Link>
                             </li>
+                            {isEventsEnabled && (
                             <li>
                                 <Link href="/events" className={`${itemId === 'events' ? 'underline text-green-300' : 'text-white no-underline'}  block px-2 `}>
                                     Events
                                 </Link>
                             </li>
+                            )}
                             <li>
                                 <Link href="/executive-members" className={`${itemId === 'executive-members' ? 'underline text-green-300' : 'text-white no-underline'}  block px-2 `}>
                                     Central Executives

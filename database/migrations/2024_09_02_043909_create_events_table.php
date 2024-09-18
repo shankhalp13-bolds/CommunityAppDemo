@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('community_id');
+            $table->foreign('community_id')->references('id')->on('communities')->onDelete('cascade');
             $table->string("event_title");
             $table->text("event_desc");
             $table->string("image_path");

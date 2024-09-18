@@ -5,10 +5,10 @@ import Layout from '@/Layouts/Layout'
 import { Head } from '@inertiajs/react'
 import React from 'react'
 
-const Home = ({ gallery }) => {
+const Home = ({ gallery,isEventsEnabled }) => {
 
     return (
-        <Layout className=''>
+        <Layout isEventsEnabled={isEventsEnabled} className=''>
             <>
                 <Head>
                     <title>STBA Homepage</title>
